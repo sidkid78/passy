@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(88% 0.15 351);
+  --color-primary-dark: oklch(80% 0.15 351);
+  --color-secondary: oklch(85% 0.08 194);
+  --color-secondary-dark: oklch(78% 0.08 194);
+  --color-surface: oklch(98% 0 0);
+  --color-text-primary: oklch(40% 0 0);
+  --color-text-secondary: oklch(62% 0 0);
+  
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+@layer base {
+  * {
+    border-color: oklch(90% 0 0);
+  }
+  
+  body {
+    @apply bg-white text-[oklch(40%_0_0)];
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

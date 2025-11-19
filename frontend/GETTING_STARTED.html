@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Getting Started with Passy</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="getting-started-with-passy">Getting Started with Passy</h1>
+<p>Welcome! This guide will get you up and running quickly.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Node.js 20+ installed</li>
+<li>Firebase account</li>
+<li>A code editor (VS Code recommended)</li>
+</ul>
+<h2 id="quick-setup-5-steps">Quick Setup (5 steps)</h2>
+<h3 id="step-1-install-dependencies">Step 1: Install Dependencies</h3>
+<pre><code class="language-bash">npm install
+</code></pre>
+<h3 id="step-2-create-environment-file">Step 2: Create Environment File</h3>
+<p>Create a file named <code>.env.local</code> in this directory (<code>frontend/</code>) with your Firebase configuration:</p>
+<pre><code class="language-env">NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+</code></pre>
+<p><strong>Where to get these values:</strong></p>
+<ol>
+<li>Go to <a href="https://console.firebase.google.com/">Firebase Console</a></li>
+<li>Create a new project (or select existing)</li>
+<li>Click the gear icon → Project Settings</li>
+<li>Scroll down to &quot;Your apps&quot;</li>
+<li>Click the web icon (<code>&lt;/&gt;</code>)</li>
+<li>Copy the config values</li>
+</ol>
+<h3 id="step-3-enable-firebase-services">Step 3: Enable Firebase Services</h3>
+<p>In Firebase Console:</p>
+<ol>
+<li>
+<p><strong>Authentication:</strong></p>
+<ul>
+<li>Go to Build → Authentication</li>
+<li>Click &quot;Get started&quot;</li>
+<li>Enable &quot;Email/Password&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Firestore:</strong></p>
+<ul>
+<li>Go to Build → Firestore Database</li>
+<li>Click &quot;Create database&quot;</li>
+<li>Start in &quot;test mode&quot;</li>
+<li>Choose your location</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-4-deploy-firestore-rules">Step 4: Deploy Firestore Rules</h3>
+<p>From the <strong>parent directory</strong> (one level up):</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> ..
+firebase login
+firebase init
+firebase deploy --only firestore:rules
+<span class="hljs-built_in">cd</span> frontend
+</code></pre>
+<h3 id="step-5-run-the-app">Step 5: Run the App</h3>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<p>Open <a href="http://localhost:3000">http://localhost:3000</a></p>
+<h2 id="first-time-using-the-app">First Time Using the App</h2>
+<ol>
+<li><strong>Sign Up</strong> - Create your account on the landing page</li>
+<li><strong>Create Event</strong> - Click the &quot;Create Event&quot; button</li>
+<li><strong>Fill Details:</strong>
+<ul>
+<li>Event name (e.g., &quot;Sarah's Baby Shower&quot;)</li>
+<li>Date of the event</li>
+<li>Budget amount</li>
+<li>Choose a theme (Pink, Blue, Neutral, or Modern)</li>
+</ul>
+</li>
+<li><strong>Start Planning!</strong>
+<ul>
+<li>Add tasks to your checklist</li>
+<li>Track expenses in the budget tab</li>
+<li>Add guests and track RSVPs</li>
+<li>Create a gift registry</li>
+</ul>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="module-not-found-errors">&quot;Module not found&quot; Errors</h3>
+<p>Make sure you're in the <code>frontend</code> directory and have run <code>npm install</code>.</p>
+<h3 id="firebase-errors">Firebase Errors</h3>
+<ol>
+<li>Check that <code>.env.local</code> exists in the <code>frontend</code> directory</li>
+<li>Verify all values in <code>.env.local</code> are correct (no <code>your_</code> placeholders)</li>
+<li>Ensure Firebase services (Auth &amp; Firestore) are enabled</li>
+</ol>
+<h3 id="permission-denied-in-firestore">&quot;Permission Denied&quot; in Firestore</h3>
+<p>Deploy the security rules:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> ..
+firebase deploy --only firestore:rules
+<span class="hljs-built_in">cd</span> frontend
+</code></pre>
+<h3 id="build-errors">Build Errors</h3>
+<p>Clear the cache and restart:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">rm</span> -rf .next
+npm run dev
+</code></pre>
+<h2 id="file-structure">File Structure</h2>
+<pre><code>frontend/
+├── app/              ← Your pages (home, event, etc.)
+├── components/       ← Reusable UI components
+├── lib/              ← Services, hooks, and utilities
+├── .env.local        ← YOUR FIREBASE CONFIG (create this!)
+└── package.json
+</code></pre>
+<h2 id="available-commands">Available Commands</h2>
+<ul>
+<li><code>npm run dev</code> - Start development server</li>
+<li><code>npm run build</code> - Build for production</li>
+<li><code>npm start</code> - Start production server</li>
+<li><code>npm run lint</code> - Check for code issues</li>
+<li><code>npm run setup</code> - Verify your setup</li>
+</ul>
+<h2 id="features">Features</h2>
+<p>✅ Create multiple baby shower events
+✅ Task checklist with progress tracking
+✅ Budget tracker with expense categories
+✅ Guest list with RSVP management
+✅ Gift registry with claim tracking
+✅ Beautiful themes (Pink, Blue, Neutral, Modern)
+✅ Real-time updates across all devices
+✅ Responsive design for mobile and desktop</p>
+<h2 id="need-more-help">Need More Help?</h2>
+<p>Check these documentation files in the parent directory:</p>
+<ul>
+<li><code>../QUICKSTART.md</code> - Quick start guide</li>
+<li><code>../SETUP.md</code> - Detailed setup instructions</li>
+<li><code>../DEPLOYMENT.md</code> - Deploy to production</li>
+<li><code>../PROJECT_SUMMARY.md</code> - Technical details</li>
+</ul>
+<h2 id="support">Support</h2>
+<p>If you run into issues:</p>
+<ol>
+<li>Check the troubleshooting section above</li>
+<li>Review the Firebase documentation</li>
+<li>Check Next.js documentation</li>
+<li>Open an issue in the repository</li>
+</ol>
+<hr>
+<p>Happy planning! 👶💕✨</p>
+
+            
+            
+        </body>
+        </html>

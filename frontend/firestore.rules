@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function isEventHost(eventId) {
+      return request.auth != null && 
+             get(/databases/$(database)/documents/events/$(eventId)).data.hostUserId == request.auth.uid;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Events collection
+    match /events/{eventId} {
+      // Host has full access
+      allow read, write: if isOwner(resource.data.hostUserId) || 
+                            isOwner(request.resource.data.hostUserId);
+      
+      // Allow public read for sharing (in production, validate invite token)
+      allow read: if true;
+
+      // Tasks subcollection
+      match /tasks/{taskId} {
+        allow read, write: if isEventHost(eventId);
+      }
+      
+      // Expenses subcollection
+      match /expenses/{expId} {
+        allow read, write: if isEventHost(eventId);
+      }
+
+      // Registry items subcollection
+      match /registry_items/{itemId} {
+        // Anyone can read registry items
+        allow read: if true;
+        // Only host can write
+        allow write: if isEventHost(eventId);
+        // Allow guests to claim/unclaim items (update only specific fields)
+        allow update: if request.auth != null &&
+                        request.resource.data.diff(resource.data)
+                          .affectedKeys()
+                          .hasOnly(['isClaimed', 'claimedBy', 'claimedByName']);
+      }
+    }
+    
+    // Guests collection (root level for easier querying)
+    match /guests/{guestId} {
+      // Allow read if authenticated
+      allow read: if request.auth != null;
+      // Allow write if authenticated (in production, validate event ownership)
+      allow write: if request.auth != null;
+    }
+  }
+}
+
+
