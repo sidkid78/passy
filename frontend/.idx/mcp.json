@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+      "firebase": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "firebase-tools@latest",
+          "mcp",
+          "--dir",
+          "frontend"
+        ],
+        "env": {
+            "FIREBASE_STORAGE_BUCKET": "passy-52a5f.firebasestorage.app"
+        }
+      }
+    }
+  }

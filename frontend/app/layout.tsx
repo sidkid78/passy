@@ -1,11 +1,29 @@
 import type { Metadata } from 'next';
-import { Nunito } from 'next/font/google';
+import { Playfair_Display, PT_Sans } from 'next/font/google';
 import './globals.css';
+import { AuthProvider } from '@/src/context/auth-context';
+import { Toaster } from '@/components/ui/sonner';
+import { 
+  SidebarProvider, 
+  Sidebar, 
+  SidebarContent, 
+  SidebarHeader, 
+  SidebarFooter 
+} from '@/components/ui/sidebar';
+import { SidebarNav } from '@/components/sidebar-nav';
+import { Icons } from '@/components/icons';
 
-const nunito = Nunito({
+const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-nunito',
+  variable: '--font-playfair',
+});
+
+const ptSans = PT_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-pt-sans',
 });
 
 export const metadata: Metadata = {
@@ -20,10 +38,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${nunito.variable} font-sans antialiased`}>
-        {children}
+      <body className={`${playfair.variable} ${ptSans.variable} font-sans antialiased`}>
+        <AuthProvider>
+          <SidebarProvider>
+            <div className="flex min-h-screen w-full">
+              <Sidebar>
+                <SidebarHeader className="border-b">
+                  <div className="flex items-center gap-2 px-2 py-3">
+                    <Icons.Logo className="h-6 w-6 text-primary" />
+                    <h1 className="font-headline text-xl font-bold text-primary">Passy</h1>
+                  </div>
+                </SidebarHeader>
+                <SidebarContent className="p-4">
+                  <SidebarNav />
+                </SidebarContent>
+                <SidebarFooter className="border-t p-4">
+                  <p className="text-xs text-muted-foreground text-center">
+                    © 2025 Passy
+                  </p>
+                </SidebarFooter>
+              </Sidebar>
+              <main className="flex-1 overflow-auto">
+                {children}
+              </main>
+            </div>
+            <Toaster />
+          </SidebarProvider>
+        </AuthProvider>
       </body>
     </html>
   );
 }
+
 

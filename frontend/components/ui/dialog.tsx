@@ -126,6 +126,38 @@ const DialogDescription = React.forwardRef<
 ))
 DialogDescription.displayName = "DialogDescription"
 
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
+  />
+)
+DialogFooter.displayName = "DialogFooter"
+
+const DialogClose = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ children, ...props }, ref) => {
+  const { setOpen } = useDialog()
+  
+  return (
+    <button
+      ref={ref}
+      onClick={() => setOpen(false)}
+      {...props}
+    >
+      {children}
+    </button>
+  )
+})
+DialogClose.displayName = "DialogClose"
+
 export {
   Dialog,
   DialogTrigger,
@@ -133,5 +165,7 @@ export {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogFooter,
+  DialogClose,
 }
 
