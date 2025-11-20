@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { SidebarNav } from '@/components/sidebar-nav';
 import { Icons } from '@/components/icons';
+import { Analytics } from '@vercel/analytics/next';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -66,6 +67,7 @@ export default function RootLayout({
               </Sidebar>
               <main className="flex-1 overflow-auto">
                 {children}
+                <Analytics />
               </main>
             </div>
             <Toaster />
