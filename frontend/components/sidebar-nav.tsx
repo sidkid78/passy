@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { title: 'Budget Tracker', href: '/budget', icon: Icons.Budget },
   { title: 'Registry Links', href: '/registry', icon: Icons.Registry },
   { title: 'Photo Gallery', href: '/gallery', icon: Icons.Gallery },
+  { title: 'Upgrade to Premium', href: '/pricing', icon: Icons.Premium },
 ];
 
 export function SidebarNav() {

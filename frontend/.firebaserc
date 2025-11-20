@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "passy-52a5f"
+  }
+}

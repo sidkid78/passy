@@ -13,6 +13,7 @@ import {
   Baby,
   Menu,
   Bot,
+  Crown,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -42,6 +43,7 @@ export const Icons = {
   Gallery: ImageIcon,
   DecorAssistant: Wand2,
   ThankYouHelper: HeartHandshake,
+  Premium: Crown,
   Google: GoogleIcon,
 };
 
