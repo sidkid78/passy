@@ -17,7 +17,7 @@ import remarkGfm from 'remark-gfm';
 interface Message {
   role: 'user' | 'model';
   content: string;
-  imageUrl?: string;
+  imageUrls?: string[];
   imagePrompt?: string;
 }
 
@@ -57,7 +57,7 @@ export default function ThemeAssistantPage() {
       const aiMessage: Message = { 
         role: 'model', 
         content: result.response,
-        imageUrl: result.imageUrl,
+        imageUrls: result.imageUrls,
         imagePrompt: result.imagePrompt,
       };
       setMessages((prev) => [...prev, aiMessage]);
@@ -116,16 +116,25 @@ export default function ThemeAssistantPage() {
                           </ReactMarkdown>
                         </div>
                       )}
-                      {message.imageUrl && (
-                        <div className="mt-4 space-y-2">
+                      {message.imageUrls && message.imageUrls.length > 0 && (
+                        <div className="mt-4 space-y-3">
                           <p className="text-xs text-muted-foreground italic">
-                            🎨 Here's a visual of this theme idea:
+                            🎨 Here are {message.imageUrls.length} visual{message.imageUrls.length > 1 ? 's' : ''} of this theme idea:
                           </p>
-                          <img 
-                            src={message.imageUrl} 
-                            alt={message.imagePrompt || 'Theme visualization'} 
-                            className="rounded-lg w-full max-w-md border-2 border-primary/20 shadow-md hover:border-primary/40 transition-colors"
-                          />
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {message.imageUrls.map((imageUrl, imgIndex) => (
+                              <div key={imgIndex} className="relative group">
+                                <img 
+                                  src={imageUrl} 
+                                  alt={`${message.imagePrompt || 'Theme visualization'} - Variation ${imgIndex + 1}`} 
+                                  className="rounded-lg w-full h-auto border-2 border-primary/20 shadow-md hover:border-primary/40 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                                />
+                                <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                  Option {imgIndex + 1}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>

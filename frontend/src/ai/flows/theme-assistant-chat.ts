@@ -17,7 +17,7 @@ export type ThemeAssistantChatInput = z.infer<typeof ThemeAssistantChatInputSche
 const ThemeAssistantChatOutputSchema = z.object({
   response: z.string().describe("The AI's response to the user."),
   imagePrompt: z.string().optional().describe("A prompt to generate an image of the theme idea."),
-  imageUrl: z.string().optional().describe("The generated image URL if an image was created."),
+  imageUrls: z.array(z.string()).optional().describe("An array of generated image URLs (up to 3 images)."),
 });
 export type ThemeAssistantChatOutput = z.infer<typeof ThemeAssistantChatOutputSchema>;
 
@@ -58,7 +58,7 @@ export async function themeAssistantChat(
       historyLength: input.history?.length || 0
     });
     
-    let imageUrl: string | undefined;
+    let imageUrls: string[] | undefined;
     let imagePrompt: string | undefined;
     
     if (shouldGenerateImage) {
@@ -75,13 +75,13 @@ export async function themeAssistantChat(
         console.log('[Theme Assistant] Image prompt created:', imagePrompt?.substring(0, 100));
         
         if (imagePrompt) {
-          // Generate image using Imagen
-          console.log('[Theme Assistant] Calling Imagen API...');
+          // Generate 3 images using Imagen
+          console.log('[Theme Assistant] Calling Imagen API for 3 images...');
           const imageResult = await ai.models.generateImages({
             model: 'imagen-4.0-generate-001',
             prompt: `Beautiful elegant baby shower party scene: ${imagePrompt}. Soft natural lighting, elegant table settings, pastel decorations, welcoming warm atmosphere. Professional event photography, high quality, detailed.`,
             config: {
-              numberOfImages: 1,
+              numberOfImages: 3,
               outputMimeType: 'image/jpeg',
               aspectRatio: '16:9',
             },
@@ -93,24 +93,28 @@ export async function themeAssistantChat(
           });
           
           if (imageResult.generatedImages && imageResult.generatedImages.length > 0) {
-            const firstImage = imageResult.generatedImages[0];
-            if (firstImage?.image?.imageBytes) {
-              // Convert raw bytes to base64 data URL (direct conversion without Buffer)
-              imageUrl = `data:image/jpeg;base64,${firstImage.image.imageBytes}`;
-              console.log('[Theme Assistant] ✅ Image generated successfully');
-            }
+            imageUrls = imageResult.generatedImages
+              .map(img => {
+                if (img?.image?.imageBytes) {
+                  return `data:image/jpeg;base64,${img.image.imageBytes}`;
+                }
+                return null;
+              })
+              .filter((url): url is string => url !== null);
+            
+            console.log('[Theme Assistant] ✅ Generated', imageUrls.length, 'images successfully');
           }
         }
       } catch (imageError) {
-        console.error('[Theme Assistant] ❌ Error generating theme image:', imageError);
-        // Continue without image if generation fails
+        console.error('[Theme Assistant] ❌ Error generating theme images:', imageError);
+        // Continue without images if generation fails
       }
     }
     
     return { 
       response: textResponse,
       imagePrompt,
-      imageUrl,
+      imageUrls,
     };
   } catch (error) {
     console.error('Error in theme assistant chat:', error);
