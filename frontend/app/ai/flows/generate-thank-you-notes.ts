@@ -7,7 +7,7 @@
  * - GenerateThankYouNotesOutput - The return type for the generateThankYouNotes function.
  */
 
-import { ai, DEFAULT_MODEL } from '@/src/ai/genkit';
+import { ai, DEFAULT_MODEL } from '@/app/ai/genkit';
 import { z } from 'zod';
 
 const GenerateThankYouNotesInputSchema = z.object({

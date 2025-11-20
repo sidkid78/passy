@@ -15,9 +15,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import { Icons } from '@/components/icons';
-import type { UserProfile } from '@/src/lib/types';
+import type { UserProfile } from '@/lib/types';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 
@@ -119,7 +119,7 @@ export default function AccountPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-accent">
+    <div className="flex justify-center items-center min-h-screen">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-headline">{isLoginView ? 'Welcome Back!' : 'Create an Account'}</CardTitle>

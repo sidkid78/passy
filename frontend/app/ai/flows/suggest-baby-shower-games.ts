@@ -4,7 +4,7 @@
  * Uses AI to reason about appropriateness of specific options given various parameters.
  */
 
-import { ai, DEFAULT_MODEL } from '@/src/ai/genkit';
+import { ai, DEFAULT_MODEL } from '@/app/ai/genkit';
 import { z } from 'zod';
 
 const SuggestBabyShowerGamesInputSchema = z.object({

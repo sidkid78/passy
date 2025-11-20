@@ -32,9 +32,9 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
-import type { Guest } from '@/src/lib/types';
+import type { Guest } from '@/lib/types';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import { Card } from '@/components/ui/card';
 
 const initialGuests: Guest[] = [
@@ -93,9 +93,8 @@ export default function GuestManagerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader title="Guest Manager" description="Manage your baby shower guest list and track RSVPs.">
+    <div>
+      <PageHeader title="Guest Manager" description="Manage your baby shower guest list and track RSVPs.">
           <Button onClick={handleAddGuest}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add Guest
           </Button>
@@ -126,7 +125,7 @@ export default function GuestManagerPage() {
                 <Label htmlFor="rsvpStatus" className="text-right">RSVP Status</Label>
                 <Select
                   value={currentGuest?.rsvpStatus || 'Pending'}
-                  onValueChange={(value: Guest['rsvpStatus']) => setCurrentGuest({...currentGuest, rsvpStatus: value})}
+                  onValueChange={(value) => setCurrentGuest({...currentGuest, rsvpStatus: value as Guest['rsvpStatus']})}
                 >
                   <SelectTrigger className="col-span-3">
                     <SelectValue placeholder="Select RSVP status" />
@@ -206,7 +205,6 @@ export default function GuestManagerPage() {
             </TableBody>
           </Table>
         </Card>
-      </div>
     </div>
   );
 }

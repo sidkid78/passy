@@ -11,8 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/src/hooks/use-toast';
-import { generateThankYouNotes, type GenerateThankYouNotesInput, type GenerateThankYouNotesOutput } from '@/src/ai/flows/generate-thank-you-notes';
+import { useToast } from '@/app/hooks/use-toast';
+import { generateThankYouNotes, type GenerateThankYouNotesInput, type GenerateThankYouNotesOutput } from '@/app/ai/flows/generate-thank-you-notes';
 import { Loader2, Copy } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -63,9 +63,8 @@ export default function ThankYouNotesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader 
+    <div>
+      <PageHeader 
           title="AI Thank You Note Helper" 
           description="Effortlessly generate personalized thank you notes for your baby shower gifts." 
         />
@@ -176,7 +175,6 @@ export default function ThankYouNotesPage() {
             </CardContent>
           </Card>
         )}
-      </div>
     </div>
   );
 }

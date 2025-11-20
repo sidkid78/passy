@@ -22,7 +22,7 @@ interface RegistryTabProps {
 export default function RegistryTab({ eventId }: RegistryTabProps) {
   const [items, setItems] = useState<RegistryItem[]>([]);
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [storeName, setStoreName] = useState('');
   const [url, setUrl] = useState('');
 
@@ -38,24 +38,18 @@ export default function RegistryTab({ eventId }: RegistryTabProps) {
 
   const handleAddItem = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!name.trim()) return;
 
     await FirestoreService.createRegistryItem(eventId, {
-      title,
+      eventId: eventId,
+      name: name,
       storeName: storeName || undefined,
       url: url || undefined,
     });
-
-    setTitle('');
-    setStoreName('');
-    setUrl('');
-    setShowAddDialog(false);
   };
 
   const handleDelete = async (itemId: string) => {
-    if (confirm('Remove this item from registry?')) {
-      await FirestoreService.deleteRegistryItem(eventId, itemId);
-    }
+    await FirestoreService.deleteRegistryItem(eventId, itemId);
   };
 
   return (
@@ -76,37 +70,17 @@ export default function RegistryTab({ eventId }: RegistryTabProps) {
         </CardContent>
       </Card>
 
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Registry Items</h3>
-        <Button onClick={() => setShowAddDialog(true)}>
-          <Plus className="w-4 h-4 mr-2" />
-          Add Item
-        </Button>
-      </div>
-
       <div className="grid gap-3 md:grid-cols-2">
         {items.map((item) => (
           <Card key={item.id} className={item.isClaimed ? 'opacity-60' : ''}>
             <CardContent className="p-4">
-              <div className="flex items-start justify-between mb-2">
+              <div className="flex justify-between items-center">
                 <div className="flex-1">
-                  <div className="font-medium flex items-center gap-2">
-                    {item.title}
-                    {item.isClaimed && (
-                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                        Claimed
-                      </span>
-                    )}
-                  </div>
-                  {item.storeName && (
-                    <div className="text-sm text-muted-foreground">
-                      {item.storeName}
-                    </div>
-                  )}
-                  {item.isClaimed && item.claimedByName && (
-                    <div className="text-sm text-muted-foreground">
-                      Claimed by {item.claimedByName}
-                    </div>
+                  <div className="font-medium">{item.name}</div>
+                  {item.isClaimed && (
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                      Claimed
+                    </span>
                   )}
                 </div>
                 <Button
@@ -155,8 +129,8 @@ export default function RegistryTab({ eventId }: RegistryTabProps) {
               <label className="text-sm font-medium">Item Name *</label>
               <Input
                 placeholder="Stroller"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>

@@ -43,21 +43,15 @@ export default function GuestsTab({ eventId }: GuestsTabProps) {
     if (!name.trim()) return;
 
     await FirestoreService.createGuest(eventId, {
-      name,
+      eventId: eventId,
+      name: name,
       email: email || undefined,
       note: note || undefined,
     });
-
     setName('');
     setEmail('');
     setNote('');
     setShowAddDialog(false);
-  };
-
-  const handleDelete = async (guestId: string) => {
-    if (confirm('Remove this guest?')) {
-      await FirestoreService.deleteGuest(guestId);
-    }
   };
 
   const handleStatusChange = async (guestId: string, status: GuestStatus) => {
@@ -148,7 +142,7 @@ export default function GuestsTab({ eventId }: GuestsTabProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => handleDelete(guest.id)}
+                  onClick={() => FirestoreService.deleteGuest(guest.id)}
                 >
                   <Trash2 className="w-4 h-4 text-destructive" />
                 </Button>

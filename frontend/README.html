@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x1f476; Passy - AI-Powered Baby Shower Planning App</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="-passy---ai-powered-baby-shower-planning-app">👶 Passy - AI-Powered Baby Shower Planning App</h1>
+<p>The simplest and smartest way to plan a beautiful baby shower. Built with Next.js 15, React 19, TypeScript, Firebase, and Google Gemini AI.</p>
+<hr>
+<h2 id="-features">✨ Features</h2>
+<h3 id="-ai-powered-tools">🤖 <strong>AI-Powered Tools</strong></h3>
+<ul>
+<li><strong>🎨 Theme Assistant</strong> - Conversational AI that brainstorms themes with you and generates 3 beautiful visualization images per idea using Google Imagen 4.0</li>
+<li><strong>🎮 Game Planner</strong> - Get personalized baby shower game suggestions based on your guests and theme</li>
+<li><strong>💌 Thank You Note Helper</strong> - Generate elegant, personalized thank you notes in cursive font with AI</li>
+</ul>
+<h3 id="-core-planning-features">📋 <strong>Core Planning Features</strong></h3>
+<ul>
+<li><strong>👥 Guest Manager</strong> - Track RSVPs, manage guest lists, and monitor attendance</li>
+<li><strong>✅ Checklist</strong> - Comprehensive task management with progress tracking</li>
+<li><strong>💰 Budget Tracker</strong> - Monitor expenses across categories and stay on budget</li>
+<li><strong>🎁 Registry Links</strong> - Centralize and share all your baby registry links</li>
+<li><strong>📸 Photo Gallery</strong> - Share memorable moments from your shower</li>
+<li><strong>📨 Digital Invitations</strong> - Create and send beautiful digital invites</li>
+</ul>
+<h3 id="-user-experience">🎯 <strong>User Experience</strong></h3>
+<ul>
+<li>🔐 <strong>Secure Authentication</strong> - Google Sign-In and email/password with Firebase</li>
+<li>🎨 <strong>Beautiful Design</strong> - Elegant color palette (soft lavender, muted rose, pastel purple)</li>
+<li>📱 <strong>Responsive</strong> - Seamless experience on mobile, tablet, and desktop</li>
+<li>🌙 <strong>Modern UI</strong> - Shadcn/ui components with smooth animations</li>
+<li>📐 <strong>Sidebar Navigation</strong> - Easy access to all features</li>
+</ul>
+<hr>
+<h2 id="️-tech-stack">🛠️ Tech Stack</h2>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li><strong>Framework:</strong> Next.js 15 (App Router)</li>
+<li><strong>UI Library:</strong> React 19</li>
+<li><strong>Language:</strong> TypeScript</li>
+<li><strong>Styling:</strong> Tailwind CSS v4 + @tailwindcss/typography</li>
+<li><strong>Components:</strong> Shadcn/ui + Radix UI primitives</li>
+<li><strong>Fonts:</strong> Playfair Display (headlines), PT Sans (body), Dancing Script (cursive)</li>
+<li><strong>Icons:</strong> Lucide React</li>
+</ul>
+<h3 id="backend--services">Backend &amp; Services</h3>
+<ul>
+<li><strong>Authentication:</strong> Firebase Auth</li>
+<li><strong>Database:</strong> Cloud Firestore</li>
+<li><strong>Storage:</strong> Firebase Storage</li>
+<li><strong>AI/ML:</strong> Google Gemini 2.0 Flash + Google Imagen 4.0</li>
+<li><strong>AI Framework:</strong> Google Genkit</li>
+</ul>
+<h3 id="development-tools">Development Tools</h3>
+<ul>
+<li><strong>Form Management:</strong> React Hook Form + Zod</li>
+<li><strong>Markdown Rendering:</strong> React Markdown + remark-gfm</li>
+<li><strong>Notifications:</strong> Sonner (toast)</li>
+<li><strong>Date Handling:</strong> date-fns</li>
+</ul>
+<hr>
+<h2 id="-quick-start">🚀 Quick Start</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Node.js 18 or later</li>
+<li>npm or pnpm</li>
+<li>Firebase account</li>
+<li>Google Cloud account (for Gemini AI API)</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<ol>
+<li><strong>Clone and navigate to frontend</strong></li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> frontend
+npm install
+</code></pre>
+<ol start="2">
+<li><strong>Setup Firebase</strong></li>
+</ol>
+<p>Create a Firebase project at <a href="https://console.firebase.google.com/">Firebase Console</a>:</p>
+<ul>
+<li>Enable <strong>Authentication</strong> (Email/Password + Google Sign-In)</li>
+<li>Enable <strong>Cloud Firestore</strong></li>
+<li>Enable <strong>Cloud Storage</strong></li>
+<li>Enable <strong>App Check</strong> (recommended for production)</li>
+<li>Copy your Firebase configuration</li>
+</ul>
+<ol start="3">
+<li><strong>Setup Google Gemini AI</strong></li>
+</ol>
+<p>Go to <a href="https://aistudio.google.com/">Google AI Studio</a>:</p>
+<ul>
+<li>Create an API key for Gemini</li>
+<li>Enable Imagen 4.0 API access</li>
+</ul>
+<ol start="4">
+<li><strong>Configure environment variables</strong></li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">cp</span> .env.local.example .env.local
+</code></pre>
+<p>Edit <code>.env.local</code> with your credentials:</p>
+<pre><code class="language-env"># Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+
+# Google Gemini AI
+NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=your_gemini_api_key
+</code></pre>
+<ol start="5">
+<li><strong>Deploy Firestore security rules</strong></li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> ..  <span class="hljs-comment"># Go to root directory</span>
+firebase login
+firebase init  <span class="hljs-comment"># If not already initialized</span>
+firebase deploy --only firestore:rules
+</code></pre>
+<ol start="6">
+<li><strong>Run development server</strong></li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> frontend
+npm run dev
+</code></pre>
+<ol start="7">
+<li><strong>Open your browser</strong></li>
+</ol>
+<pre><code>http://localhost:3000
+</code></pre>
+<hr>
+<h2 id="-project-structure">📁 Project Structure</h2>
+<pre><code>
+frontend/
+├── app/
+│   ├── layout.tsx              # Root layout with sidebar
+│   ├── page.tsx                # Landing page
+│   ├── globals.css             # Global styles &amp; design system
+│   ├── account/                # Authentication pages
+│   ├── dashboard/              # Main dashboard
+│   ├── themes/                 # AI Theme Assistant
+│   ├── games/                  # AI Game Planner
+│   ├── thank-you-notes/        # AI Thank You Helper
+│   ├── guests/                 # Guest Manager
+│   ├── checklist/              # Task Checklist
+│   ├── budget/                 # Budget Tracker
+│   ├── registry/               # Registry Links
+│   └── gallery/                # Photo Gallery
+├── components/
+│   ├── ui/                     # Shadcn/ui components
+│   ├── sidebar-nav.tsx         # Main navigation sidebar
+│   ├── page-header.tsx         # Reusable page header
+│   └── icons.tsx               # Icon library
+├── src/
+│   ├── context/
+│   │   └── auth-context.tsx    # Authentication context
+│   ├── hooks/
+│   │   ├── use-mobile.tsx      # Mobile detection hook
+│   │   └── use-toast.ts        # Toast notifications hook
+│   ├── lib/
+│   │   └── types.ts            # TypeScript interfaces
+│   └── ai/
+│       ├── genkit.ts           # Genkit AI configuration
+│       └── flows/              # AI flow definitions
+│           ├── theme-assistant-chat.ts
+│           ├── suggest-baby-shower-games.ts
+│           └── generate-thank-you-notes.ts
+├── lib/
+│   ├── firebase/
+│   │   └── config.ts           # Firebase initialization
+│   ├── services/
+│   │   └── firestore-service.ts # Firestore CRUD operations
+│   └── utils.ts                # Utility functions
+└── public/                     # Static assets
+</code></pre>
+<hr>
+<h2 id="-design-system">🎨 Design System</h2>
+<h3 id="color-palette">Color Palette</h3>
+<ul>
+<li><strong>Primary:</strong> Soft Lavender <code>#D0B8E3</code> - Main brand color</li>
+<li><strong>Secondary:</strong> Muted Rose <code>#E3B8D0</code> - Accents and highlights</li>
+<li><strong>Accent:</strong> Light Pastel Purple <code>#F2EFFF</code> - Backgrounds and surfaces</li>
+</ul>
+<h3 id="typography">Typography</h3>
+<ul>
+<li><strong>Headlines:</strong> Playfair Display (elegant serif)</li>
+<li><strong>Body Text:</strong> PT Sans (clean sans-serif)</li>
+<li><strong>Cursive/Script:</strong> Dancing Script (for thank you notes)</li>
+</ul>
+<h3 id="components">Components</h3>
+<ul>
+<li>Modern card-based layouts</li>
+<li>Smooth hover transitions</li>
+<li>Elegant shadows and borders</li>
+<li>Responsive grid systems</li>
+</ul>
+<hr>
+<h2 id="-ai-features-deep-dive">🤖 AI Features Deep Dive</h2>
+<h3 id="theme-assistant">Theme Assistant</h3>
+<ul>
+<li><strong>Conversational AI</strong> powered by Gemini 2.0 Flash</li>
+<li><strong>Image Generation</strong> with Google Imagen 4.0</li>
+<li><strong>3 Visual Variations</strong> per theme idea</li>
+<li><strong>Markdown Support</strong> for rich text responses</li>
+<li><strong>Context-Aware</strong> - remembers conversation history</li>
+</ul>
+<h3 id="game-planner">Game Planner</h3>
+<ul>
+<li>Analyzes guest preferences and shower theme</li>
+<li>Generates custom game suggestions</li>
+<li>Provides setup instructions and rules</li>
+<li>Markdown-formatted output for easy reading</li>
+</ul>
+<h3 id="thank-you-note-helper">Thank You Note Helper</h3>
+<ul>
+<li>Personalizes notes based on gift and guest</li>
+<li>Tone options: Formal, Informal, Humorous</li>
+<li>Beautiful cursive font (Dancing Script)</li>
+<li>One-click copy to clipboard</li>
+</ul>
+<hr>
+<h2 id="-available-scripts">📜 Available Scripts</h2>
+<pre><code class="language-bash">npm run dev      <span class="hljs-comment"># Start development server (localhost:3000)</span>
+npm run build    <span class="hljs-comment"># Build for production</span>
+npm start        <span class="hljs-comment"># Start production server</span>
+npm run lint     <span class="hljs-comment"># Run ESLint</span>
+</code></pre>
+<hr>
+<h2 id="-deployment">🚀 Deployment</h2>
+<h3 id="vercel-recommended">Vercel (Recommended)</h3>
+<ol>
+<li><strong>Set Root Directory</strong> in Vercel project settings to: <code>frontend</code></li>
+<li><strong>Add Environment Variables</strong> (all Firebase + Gemini API keys)</li>
+<li><strong>Deploy</strong></li>
+</ol>
+<p>See <code>../VERCEL_DEPLOYMENT.md</code> for detailed instructions.</p>
+<h3 id="other-platforms">Other Platforms</h3>
+<ul>
+<li>Ensure <code>frontend</code> is the build directory</li>
+<li>Set build command: <code>npm run build</code></li>
+<li>Set output directory: <code>.next</code></li>
+</ul>
+<hr>
+<h2 id="-security">🔒 Security</h2>
+<ul>
+<li>Firebase Security Rules for Firestore</li>
+<li>Firebase App Check for production</li>
+<li>Environment variables for sensitive keys</li>
+<li>Protected routes with authentication middleware</li>
+<li>Server-side AI operations (<code>'use server'</code> directive)</li>
+</ul>
+<hr>
+<h2 id="-documentation">📖 Documentation</h2>
+<ul>
+<li><strong>Setup Guide:</strong> <code>../SETUP.md</code></li>
+<li><strong>Deployment Guide:</strong> <code>../DEPLOYMENT.md</code></li>
+<li><strong>Vercel Deployment:</strong> <code>../VERCEL_DEPLOYMENT.md</code></li>
+<li><strong>Technical Summary:</strong> <code>../PROJECT_SUMMARY.md</code></li>
+<li><strong>Specification:</strong> <code>../info2.md</code></li>
+</ul>
+<hr>
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="firebase-not-configured">Firebase Not Configured</h3>
+<p>The app gracefully handles missing Firebase configuration and runs in &quot;demo mode&quot; for development.</p>
+<h3 id="ai-image-generation-issues">AI Image Generation Issues</h3>
+<ul>
+<li>Ensure <code>GEMINI_API_KEY</code> is set in environment variables</li>
+<li>Check Google AI Studio quota limits</li>
+<li>Review <code>TROUBLESHOOTING_IMAGE_GENERATION.md</code></li>
+</ul>
+<h3 id="build-errors">Build Errors</h3>
+<ul>
+<li>Clear <code>.next</code> folder: <code>rm -rf .next</code></li>
+<li>Reinstall dependencies: <code>npm install</code></li>
+<li>Check Node.js version: <code>node -v</code> (should be 18+)</li>
+</ul>
+<hr>
+<h2 id="-roadmap">🎯 Roadmap</h2>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Mobile app (React Native/Flutter)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Premium subscription features</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> More AI-powered tools</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Social sharing features</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Vendor recommendations</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Budget analytics dashboard</li>
+</ul>
+<hr>
+<h2 id="-contributing">🤝 Contributing</h2>
+<p>Contributions welcome! Please:</p>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch</li>
+<li>Make your changes</li>
+<li>Submit a pull request</li>
+</ol>
+<hr>
+<h2 id="-license">📄 License</h2>
+<p>This project is proprietary software. All rights reserved.</p>
+<hr>
+<h2 id="-support">💖 Support</h2>
+<p>For issues or questions:</p>
+<ul>
+<li>Check the documentation files in root directory</li>
+<li>Review <a href="https://firebase.google.com/docs">Firebase Documentation</a></li>
+<li>Review <a href="https://firebase.google.com/docs/genkit">Genkit Documentation</a></li>
+<li>Open an issue in the repository</li>
+</ul>
+<hr>
+<p><strong>Built with ❤️ for expecting parents everywhere.</strong></p>
+<p><em>Powered by Next.js, Firebase, and Google AI</em></p>
+
+            
+            
+        </body>
+        </html>

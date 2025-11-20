@@ -5,86 +5,110 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Passy Color Palette */
-  --color-primary: oklch(88% 0.10 307); /* Soft lavender #D0B8E3 */
-  --color-primary-dark: oklch(78% 0.10 307);
-  --color-secondary: oklch(92% 0.05 353); /* Muted rose #E3B8D0 */
-  --color-secondary-dark: oklch(85% 0.05 353);
-  --color-accent: oklch(96% 0.02 274); /* Light pastel purple #F2EFFF */
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(25% 0 0);
-  --color-muted: oklch(95% 0 0);
-  --color-muted-foreground: oklch(50% 0 0);
+  /* Passy Color Palette - HSL Colors converted to OKLCH for Tailwind v4 */
+  --color-primary: oklch(from hsl(270 39% 81%) l c h); /* Soft Lavender */
+  --color-primary-dark: oklch(from hsl(270 39% 71%) l c h);
+  --color-secondary: oklch(from hsl(330 40% 90%) l c h); /* Lighter Muted Rose */
+  --color-secondary-dark: oklch(from hsl(330 30% 60%) l c h);
+  --color-accent: oklch(from hsl(330 40% 80%) l c h); /* Muted Rose */
+  --color-background: oklch(from hsl(274 100% 97%) l c h); /* Light Pastel Purple */
+  --color-foreground: oklch(from hsl(270 25% 25%) l c h); /* Darker Purple */
+  --color-muted: oklch(from hsl(270 40% 92%) l c h); /* Muted Lavender */
+  --color-muted-foreground: oklch(from hsl(270 25% 55%) l c h);
+  --color-border: oklch(from hsl(270 30% 88%) l c h);
+  --color-input: oklch(from hsl(270 50% 94%) l c h);
+  --color-ring: oklch(from hsl(270 39% 75%) l c h);
+  --color-destructive: oklch(from hsl(0 70% 70%) l c h);
+  --color-destructive-foreground: oklch(100% 0 0);
+  
+  --color-card: oklch(100% 0 0); /* White */
+  --color-card-foreground: oklch(from hsl(270 25% 25%) l c h);
+  --color-popover: oklch(100% 0 0);
+  --color-popover-foreground: oklch(from hsl(270 25% 25%) l c h);
 
   /* Typography */
-  --font-headline: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-pt-sans), system-ui, sans-serif;
-  --font-script: var(--font-dancing-script), cursive;
+  --font-headline: 'Playfair Display', Georgia, serif;
+  --font-sans: 'PT Sans', system-ui, sans-serif;
+  --font-script: 'Dancing Script', cursive;
 
   /* Border Radius */
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
+
+  /* Sidebar Colors (using original HSL values from info3.md) */
+  --color-sidebar-background: oklch(from hsl(270 50% 93%) l c h);
+  --color-sidebar-foreground: oklch(from hsl(270 30% 35%) l c h);
+  --color-sidebar-primary: oklch(from hsl(330 40% 80%) l c h); /* Muted Rose */
+  --color-sidebar-primary-foreground: oklch(from hsl(330 60% 20%) l c h);
+  --color-sidebar-accent: oklch(from hsl(270 39% 85%) l c h); /* Soft lavender */
+  --color-sidebar-accent-foreground: oklch(from hsl(270 50% 25%) l c h);
+  --color-sidebar-border: oklch(from hsl(270 30% 85%) l c h);
+  --color-sidebar-ring: oklch(from hsl(270 39% 75%) l c h);
+
+  /* Chart Colors */
+  --color-chart-1: oklch(from hsl(270 39% 81%) l c h);
+  --color-chart-2: oklch(from hsl(330 40% 80%) l c h);
+  --color-chart-3: oklch(from hsl(270 50% 70%) l c h);
+  --color-chart-4: oklch(from hsl(330 50% 70%) l c h);
+  --color-chart-5: oklch(from hsl(270 60% 60%) l c h);
+}
+
+/* Dark mode theme */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: oklch(from hsl(270 15% 10%) l c h);
+    --color-foreground: oklch(from hsl(270 25% 85%) l c h);
+    --color-card: oklch(from hsl(270 15% 15%) l c h);
+    --color-card-foreground: oklch(from hsl(270 25% 85%) l c h);
+    --color-popover: oklch(from hsl(270 15% 12%) l c h);
+    --color-popover-foreground: oklch(from hsl(270 25% 85%) l c h);
+    --color-primary: oklch(from hsl(270 39% 71%) l c h);
+    --color-primary-dark: oklch(from hsl(270 39% 61%) l c h);
+    --color-secondary: oklch(from hsl(330 30% 60%) l c h);
+    --color-secondary-dark: oklch(from hsl(330 30% 50%) l c h);
+    --color-muted: oklch(from hsl(270 15% 25%) l c h);
+    --color-muted-foreground: oklch(from hsl(270 20% 65%) l c h);
+    --color-accent: oklch(from hsl(330 40% 70%) l c h);
+    --color-destructive: oklch(from hsl(0 60% 55%) l c h);
+    --color-border: oklch(from hsl(270 15% 30%) l c h);
+    --color-input: oklch(from hsl(270 15% 35%) l c h);
+    --color-ring: oklch(from hsl(270 39% 65%) l c h);
+    
+    --color-sidebar-background: oklch(from hsl(270 20% 12%) l c h);
+    --color-sidebar-foreground: oklch(from hsl(270 25% 80%) l c h);
+    --color-sidebar-primary: oklch(from hsl(330 40% 70%) l c h);
+    --color-sidebar-primary-foreground: oklch(from hsl(330 80% 95%) l c h);
+    --color-sidebar-accent: oklch(from hsl(270 39% 65%) l c h);
+    --color-sidebar-accent-foreground: oklch(from hsl(270 70% 90%) l c h);
+    --color-sidebar-border: oklch(from hsl(270 15% 25%) l c h);
+    --color-sidebar-ring: oklch(from hsl(270 39% 65%) l c h);
+  }
 }
 
 @layer base {
   * {
-    border-color: oklch(90% 0 0);
+    border-color: var(--color-border);
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
+  /* Font utility classes */
   .font-headline {
     font-family: var(--font-headline);
   }
   
+  .font-body {
+    font-family: var(--font-sans);
+  }
+
   .font-script {
     font-family: var(--font-script);
-  }
-}
-
-:root {
-  --sidebar: hsl(0 0% 98%);
-  --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
-}
-
-.dark {
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
-}
-
-@theme inline {
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { UploadCloud } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 
 export default function PhotoGalleryPage() {
   const [isMounted, setIsMounted] = useState(false);
@@ -24,9 +24,8 @@ export default function PhotoGalleryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader title="Photo Gallery & Memories" description="Relive the joyful moments from the baby shower.">
+    <div>
+      <PageHeader title="Photo Gallery & Memories" description="Relive the joyful moments from the baby shower.">
           <Button onClick={handleUpload}>
             <UploadCloud className="mr-2 h-4 w-4" /> Upload Photos
           </Button>
@@ -43,7 +42,6 @@ export default function PhotoGalleryPage() {
             </Button>
           </CardContent>
         </Card>
-      </div>
     </div>
   );
 }

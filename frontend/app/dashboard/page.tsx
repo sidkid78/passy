@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
-import { useAuth } from '@/src/context/auth-context';
+import { useAuth } from '@/app/context/auth-context';
 import { signOut } from 'firebase/auth';
 import { auth, isConfigured } from '@/lib/firebase/config';
 import { useRouter } from 'next/navigation';
@@ -33,15 +33,14 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
+    <div>
+      <PageHeader title="Dashboard" description="Welcome to your baby shower planning dashboard.">
           <div>
             <h1 className="text-4xl font-headline font-bold text-primary">Welcome back, {userProfile?.displayName || user?.email}!</h1>
             <p className="text-muted-foreground mt-2">Let's plan the perfect baby shower ✨</p>
           </div>
           <Button variant="outline" onClick={handleSignOut}>Sign Out</Button>
-        </div>
+        </PageHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature) => {
@@ -59,7 +58,6 @@ export default function DashboardPage() {
             );
           })}
         </div>
-      </div>
     </div>
   );
 }

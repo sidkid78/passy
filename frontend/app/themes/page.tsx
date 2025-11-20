@@ -8,9 +8,9 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Icons } from '@/components/icons';
-import { themeAssistantChat } from '@/src/ai/flows/theme-assistant-chat';
+import { themeAssistantChat } from '@/app/ai/flows/theme-assistant-chat';
 import { Send, Loader2 } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -75,24 +75,23 @@ export default function ThemeAssistantPage() {
   };
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto flex flex-col h-[calc(100vh-8rem)]">
-        <PageHeader 
-          title="AI Theme Assistant" 
-          description="Collaborate with our AI to brainstorm and create the perfect baby shower theme." 
-        />
+    <div className="flex flex-col h-full">
+      <PageHeader 
+        title="AI Theme Assistant" 
+        description="Collaborate with our AI to brainstorm and create the perfect baby shower theme." 
+      />
         
-        <Card className="flex-1 flex flex-col shadow-lg">
-          <CardHeader>
-            <CardTitle className="font-headline text-lg flex items-center gap-2">
+        <Card className="flex-1 flex flex-col shadow-lg border-2">
+          <CardHeader className="border-b bg-card">
+            <CardTitle className="font-headline text-lg flex items-center gap-2 text-foreground">
               <Icons.ThemeAssistant className="w-6 h-6 text-primary" />
               Chat with your Assistant
             </CardTitle>
-            <p className="text-xs text-muted-foreground mt-2">
-              💡 Tip: Ask for detailed theme ideas and I'll create a visual image for you!
+            <p className="text-xs text-foreground/60 mt-2">
+              💡 Tip: Ask for detailed theme ideas and I'll create visual images for you!
             </p>
           </CardHeader>
-          <CardContent className="flex-1 overflow-hidden p-0">
+          <CardContent className="flex-1 overflow-hidden p-0 bg-muted/30">
             <ScrollArea className="h-full p-6">
               <div className="space-y-4">
                 {messages.map((message, index) => (
@@ -102,15 +101,15 @@ export default function ThemeAssistantPage() {
                         <AvatarFallback className="bg-primary text-primary-foreground">AI</AvatarFallback>
                       </Avatar>
                     )}
-                    <div className={`rounded-lg px-4 py-2 max-w-[80%] ${
+                    <div className={`rounded-lg px-4 py-3 max-w-[80%] shadow-sm ${
                       message.role === 'user' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted'
+                        ? 'bg-primary/90 text-primary-foreground' 
+                        : 'bg-card text-card-foreground border border-border'
                     }`}>
                       {message.role === 'user' ? (
-                        <div className="whitespace-pre-wrap">{message.content}</div>
+                        <div className="whitespace-pre-wrap text-sm">{message.content}</div>
                       ) : (
-                        <div className="prose prose-sm max-w-none dark:prose-invert">
+                        <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-ul:text-foreground prose-ol:text-foreground">
                           <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {message.content}
                           </ReactMarkdown>
@@ -118,7 +117,7 @@ export default function ThemeAssistantPage() {
                       )}
                       {message.imageUrls && message.imageUrls.length > 0 && (
                         <div className="mt-4 space-y-3">
-                          <p className="text-xs text-muted-foreground italic">
+                          <p className="text-xs font-medium text-foreground/70 italic flex items-center gap-1">
                             🎨 Here are {message.imageUrls.length} visual{message.imageUrls.length > 1 ? 's' : ''} of this theme idea:
                           </p>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -150,8 +149,8 @@ export default function ThemeAssistantPage() {
                       <Avatar className="h-8 w-8">
                         <AvatarFallback className="bg-primary text-primary-foreground">AI</AvatarFallback>
                       </Avatar>
-                      <div className="rounded-lg px-4 py-2 bg-muted flex items-center">
-                          <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                      <div className="rounded-lg px-4 py-3 bg-card border border-border flex items-center shadow-sm">
+                          <Loader2 className="h-5 w-5 animate-spin text-primary" />
                       </div>
                    </div>
                 )}
@@ -159,7 +158,7 @@ export default function ThemeAssistantPage() {
               </div>
             </ScrollArea>
           </CardContent>
-          <CardFooter className="pt-6">
+          <CardFooter className="pt-6 border-t bg-card">
             <form onSubmit={handleSubmit} className="flex w-full items-center space-x-2">
               <Input 
                 type="text" 
@@ -167,16 +166,15 @@ export default function ThemeAssistantPage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Tell me about your ideas..." 
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 bg-background text-foreground"
               />
-              <Button type="submit" disabled={isLoading || !input.trim()}>
+              <Button type="submit" disabled={isLoading || !input.trim()} className="px-4">
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 <span className="sr-only">Send</span>
               </Button>
             </form>
           </CardFooter>
         </Card>
-      </div>
     </div>
   );
 }

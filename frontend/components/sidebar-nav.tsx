@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import type { NavItem } from '@/src/lib/types';
+import type { NavItem } from '@/lib/types';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 

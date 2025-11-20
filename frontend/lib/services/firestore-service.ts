@@ -61,9 +61,9 @@ export class FirestoreService {
     );
 
     // Add default tasks
-    await this.createTask(eventId, { title: 'Send Invitations' });
-    await this.createTask(eventId, { title: 'Book Venue' });
-    await this.createTask(eventId, { title: 'Order Cake' });
+    await this.createTask(eventId, { eventId: eventId, title: 'Send Invitations' });
+    await this.createTask(eventId, { eventId: eventId, title: 'Book Venue' });
+    await this.createTask(eventId, { eventId: eventId, title: 'Order Cake' });
 
     return eventId;
   }
@@ -154,7 +154,7 @@ export class FirestoreService {
 
     if (taskSnap.exists()) {
       const task = taskSnap.data() as Task;
-      await updateDoc(taskRef, { isCompleted: !task.isCompleted });
+      await updateDoc(taskRef, { completed: !task.completed });
     }
   }
 
@@ -171,14 +171,12 @@ export class FirestoreService {
     const expenseId = uuidv4();
     const expenseRef = doc(db!, 'events', eventId, 'expenses', expenseId);
 
-    const expenseData: Expense = {
+    const expenseData: any = {
       id: expenseId,
       eventId,
-      title: input.title,
+      description: input.description,
       category: input.category,
-      amount: input.amount,
-      isPaid: input.isPaid,
-      createdAt: Timestamp.now(),
+      amount: input.amount
     };
 
     await import('firebase/firestore').then(({ setDoc }) =>
@@ -278,18 +276,12 @@ export class FirestoreService {
     const itemData: any = {
       id: itemId,
       eventId,
-      title: input.title,
-      isClaimed: false,
-      createdAt: Timestamp.now(),
+      name: input.name,
+      url: input.url,
+      storeName: input.storeName,
     };
 
     // Only add optional fields if provided
-    if (input.storeName) {
-      itemData.storeName = input.storeName;
-    }
-    if (input.url) {
-      itemData.url = input.url;
-    }
 
     await import('firebase/firestore').then(({ setDoc }) =>
       setDoc(itemRef, itemData)
@@ -306,7 +298,7 @@ export class FirestoreService {
 
     return onSnapshot(itemsRef, (snapshot) => {
       const items = snapshot.docs.map((doc) => doc.data() as RegistryItem);
-      callback(items.sort((a, b) => a.title.localeCompare(b.title)));
+      callback(items.sort((a, b) => a.name.localeCompare(b.name)));
     });
   }
 

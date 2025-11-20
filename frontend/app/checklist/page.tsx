@@ -7,9 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import type { ChecklistItem } from '@/src/lib/types';
+import type { ChecklistItem } from '@/lib/types';
 import { PlusCircle, Trash2, Edit2 } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import {
   Dialog,
   DialogContent,
@@ -102,9 +102,8 @@ export default function ChecklistPage() {
   const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader 
+    <div>
+      <PageHeader 
           title="Baby Shower Checklist" 
           description="Stay organized and ensure every detail is covered for a flawless event."
         />
@@ -120,8 +119,8 @@ export default function ChecklistPage() {
                 value={newTask} 
                 onChange={(e) => setNewTask(e.target.value)} 
                 placeholder="e.g., Order cake" 
-                className="flex-grow"
-                onKeyPress={(e) => e.key === 'Enter' && handleAddTask()}
+                className="grow"
+                onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
               />
               <Button onClick={handleAddTask}>
                 <PlusCircle className="mr-2 h-4 w-4" /> Add Task
@@ -229,7 +228,6 @@ export default function ChecklistPage() {
           </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
     </div>
   );
 }

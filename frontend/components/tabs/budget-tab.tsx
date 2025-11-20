@@ -24,8 +24,8 @@ interface BudgetTabProps {
 export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [estimatedCost, setEstimatedCost] = useState('');
   const [category, setCategory] = useState<Expense['category']>('other');
 
   useEffect(() => {
@@ -42,17 +42,17 @@ export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
 
   const handleAddExpense = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !amount) return;
+    if (!itemName.trim() || !estimatedCost) return;
 
     await FirestoreService.createExpense(eventId, {
-      title,
-      amount: parseFloat(amount),
+      eventId: eventId,
+      description: itemName,
+      amount: parseFloat(estimatedCost || '0'),
       category,
-      isPaid: true,
     });
 
-    setTitle('');
-    setAmount('');
+    setItemName('');
+    setEstimatedCost('0');
     setCategory('other');
     setShowAddDialog(false);
   };
@@ -118,7 +118,7 @@ export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
           <Card key={expense.id}>
             <CardContent className="p-4 flex items-center justify-between">
               <div>
-                <div className="font-medium">{expense.title}</div>
+                  <div className="font-medium">{expense.description}</div>
                 <div className="text-sm text-muted-foreground capitalize">
                   {expense.category}
                 </div>
@@ -159,8 +159,8 @@ export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
               <label className="text-sm font-medium">Item</label>
               <Input
                 placeholder="Decorations"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
                 required
               />
             </div>
@@ -171,8 +171,8 @@ export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
                 type="number"
                 step="0.01"
                 placeholder="50.00"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                value={estimatedCost || '0'}
+                onChange={(e) => setEstimatedCost(e.target.value)}
                 required
               />
             </div>

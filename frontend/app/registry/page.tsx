@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -15,9 +15,9 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import type { RegistryLink } from '@/src/lib/types';
+import type { RegistryLink } from '@/lib/types';
 import { PlusCircle, Edit, Trash2, ExternalLink } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 
 const initialRegistryLinks: RegistryLink[] = [
   { id: '1', platformName: 'Amazon Baby Registry', url: 'https://www.amazon.com/baby-reg' },
@@ -88,9 +88,8 @@ export default function RegistryLinksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader title="Registry Links" description="Manage and share your baby registry links.">
+    <div>
+      <PageHeader title="Registry Links" description="Manage and share your baby registry links.">
           <Button onClick={handleAddLink}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add Registry Link
           </Button>
@@ -112,7 +111,9 @@ export default function RegistryLinksPage() {
               </div>
             </div>
           <DialogFooter>
-            <DialogClose><Button type="button" variant="outline">Cancel</Button></DialogClose>
+            <DialogClose>
+              <Button type="button" variant="outline">Cancel</Button>
+            </DialogClose>
             <Button type="button" onClick={handleSaveLink}>Save Link</Button>
           </DialogFooter>
           </DialogContent>
@@ -138,23 +139,22 @@ export default function RegistryLinksPage() {
               <CardHeader>
                 <CardTitle className="font-headline text-lg">{link.platformName}</CardTitle>
               </CardHeader>
-              <CardContent className="flex-grow">
+              <CardContent className="grow">
                 <Link href={link.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline break-all text-sm flex items-center">
                   {link.url} <ExternalLink className="ml-1 h-3 w-3" />
                 </Link>
               </CardContent>
-              <CardContent className="pt-0 flex gap-2 justify-end">
+              <CardFooter>
                 <Button variant="outline" size="sm" onClick={() => handleEditLink(link)}>
                   <Edit className="mr-1 h-3 w-3" /> Edit
                 </Button>
                 <Button variant="destructive" size="sm" onClick={() => handleDeleteLink(link.id)}>
                   <Trash2 className="mr-1 h-3 w-3" /> Delete
                 </Button>
-              </CardContent>
+              </CardFooter>
             </Card>
           ))}
         </div>
-      </div>
     </div>
   );
 }

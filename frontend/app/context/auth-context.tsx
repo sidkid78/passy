@@ -5,7 +5,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db, isConfigured } from '@/lib/firebase/config';
-import type { AuthContextType, UserProfile } from '@/src/lib/types';
+import type { AuthContextType, UserProfile } from '@/lib/types';
 import { Loader2 } from 'lucide-react';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

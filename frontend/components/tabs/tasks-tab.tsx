@@ -24,22 +24,22 @@ interface TasksTabProps {
 export default function TasksTab({ eventId }: TasksTabProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
 
   useEffect(() => {
     const unsubscribe = FirestoreService.subscribeToTasks(eventId, setTasks);
     return () => unsubscribe();
   }, [eventId]);
 
-  const completedCount = tasks.filter((t) => t.isCompleted).length;
+  const completedCount = tasks.filter((t) => t.completed).length;
   const progress = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
 
   const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTaskTitle.trim()) return;
+    if (!newTaskDescription.trim()) return;
 
-    await FirestoreService.createTask(eventId, { title: newTaskTitle });
-    setNewTaskTitle('');
+    await FirestoreService.createTask(eventId, { eventId: eventId, title: newTaskDescription });
+    setNewTaskDescription('');
     setShowAddDialog(false);
   };
 
@@ -48,9 +48,7 @@ export default function TasksTab({ eventId }: TasksTabProps) {
   };
 
   const handleDelete = async (taskId: string) => {
-    if (confirm('Delete this task?')) {
-      await FirestoreService.deleteTask(eventId, taskId);
-    }
+    await FirestoreService.deleteTask(eventId, taskId);
   };
 
   return (
@@ -82,12 +80,12 @@ export default function TasksTab({ eventId }: TasksTabProps) {
           <Card key={task.id}>
             <CardContent className="p-4 flex items-center gap-3">
               <Checkbox
-                checked={task.isCompleted}
+                checked={task.completed}
                 onCheckedChange={() => handleToggle(task)}
               />
               <span
                 className={`flex-1 ${
-                  task.isCompleted ? 'line-through text-muted-foreground' : ''
+                  task.completed ? 'line-through text-muted-foreground' : ''
                 }`}
               >
                 {task.title}
@@ -122,9 +120,9 @@ export default function TasksTab({ eventId }: TasksTabProps) {
           </DialogHeader>
           <form onSubmit={handleAddTask} className="space-y-4">
             <Input
-              placeholder="Task title"
-              value={newTaskTitle}
-              onChange={(e) => setNewTaskTitle(e.target.value)}
+              placeholder="Task description"
+              value={newTaskDescription}
+              onChange={(e) => setNewTaskDescription(e.target.value)}
               required
             />
             <div className="flex gap-2">

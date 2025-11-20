@@ -26,9 +26,9 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { BudgetItem } from '@/src/lib/types';
+import type { BudgetItem } from '@/lib/types';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import { useToast } from '@/src/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 
 const initialBudgetItems: BudgetItem[] = [
   { id: '1', category: 'Venue', itemName: 'Community Hall Rental', estimatedCost: 200, actualCost: 200, paid: true },
@@ -95,9 +95,8 @@ export default function BudgetTrackerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader title="Budget Tracker" description="Manage your baby shower expenses and stay on track.">
+    <div>
+      <PageHeader title="Budget Tracker" description="Manage your baby shower expenses and stay on track.">
           <Button onClick={handleAddItem}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add Item
           </Button>
@@ -213,7 +212,6 @@ export default function BudgetTrackerPage() {
             </TableFooter>
           </Table>
         </Card>
-      </div>
     </div>
   );
 }

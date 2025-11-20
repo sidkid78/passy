@@ -10,8 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { useToast } from '@/src/hooks/use-toast';
-import { suggestBabyShowerGames, type SuggestBabyShowerGamesInput, type SuggestBabyShowerGamesOutput } from '@/src/ai/flows/suggest-baby-shower-games';
+import { useToast } from '@/app/hooks/use-toast';
+import { suggestBabyShowerGames, type SuggestBabyShowerGamesInput, type SuggestBabyShowerGamesOutput } from '@/app/ai/flows/suggest-baby-shower-games';
 import { Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -50,9 +50,8 @@ export default function GameSuggestionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-accent p-6">
-      <div className="max-w-7xl mx-auto">
-        <PageHeader 
+    <div>
+      <PageHeader 
           title="AI Game Planner" 
           description="Get personalized baby shower game suggestions based on your guests and theme." 
         />
@@ -119,7 +118,6 @@ export default function GameSuggestionsPage() {
             </CardContent>
           </Card>
         )}
-      </div>
     </div>
   );
 }
