@@ -19,6 +19,7 @@
   /* Typography */
   --font-headline: var(--font-playfair), Georgia, serif;
   --font-sans: var(--font-pt-sans), system-ui, sans-serif;
+  --font-script: var(--font-dancing-script), cursive;
 
   /* Border Radius */
   --radius-sm: 0.5rem;
@@ -39,6 +40,10 @@
   
   .font-headline {
     font-family: var(--font-headline);
+  }
+  
+  .font-script {
+    font-family: var(--font-script);
   }
 }
 

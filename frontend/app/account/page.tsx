@@ -9,7 +9,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { auth, db } from '@/lib/firebase/config';
+import { auth, db, isConfigured } from '@/lib/firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -31,6 +31,16 @@ export default function AccountPage() {
 
   const handleAuthAction = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!isConfigured || !auth || !db) {
+      toast({ 
+        variant: "destructive",
+        title: 'Firebase Not Configured', 
+        description: 'Please add Firebase environment variables to enable authentication.' 
+      });
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -69,6 +79,15 @@ export default function AccountPage() {
   };
   
   const handleGoogleSignIn = async () => {
+    if (!isConfigured || !auth || !db) {
+      toast({ 
+        variant: "destructive",
+        title: 'Firebase Not Configured', 
+        description: 'Please add Firebase environment variables to enable authentication.' 
+      });
+      return;
+    }
+    
     setLoading(true);
     const provider = new GoogleAuthProvider();
     try {

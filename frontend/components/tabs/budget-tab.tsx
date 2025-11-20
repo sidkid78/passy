@@ -180,6 +180,7 @@ export default function BudgetTab({ eventId, budgetTotal }: BudgetTabProps) {
             <div className="space-y-2">
               <label className="text-sm font-medium">Category</label>
               <select
+                title="Category"  
                 value={category}
                 onChange={(e) =>
                   setCategory(e.target.value as Expense['category'])

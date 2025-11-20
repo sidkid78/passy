@@ -159,10 +159,12 @@ export default function ThankYouNotesPage() {
               </Button>
             </CardHeader>
             <CardContent>
-              <div className="p-4 border rounded-md bg-background min-h-[150px] prose prose-sm max-w-none dark:prose-invert">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {generatedNote.thankYouNote}
-                </ReactMarkdown>
+              <div className="p-8 border-2 border-primary/20 rounded-lg bg-gradient-to-br from-background to-accent/30 min-h-[200px] shadow-lg">
+                <div className="font-script text-2xl leading-relaxed text-foreground/90 prose prose-lg max-w-none dark:prose-invert">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {generatedNote.thankYouNote}
+                  </ReactMarkdown>
+                </div>
               </div>
             </CardContent>
           </Card>

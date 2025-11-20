@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, PT_Sans } from 'next/font/google';
+import { Playfair_Display, PT_Sans, Dancing_Script } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/src/context/auth-context';
 import { Toaster } from '@/components/ui/sonner';
@@ -26,6 +26,12 @@ const ptSans = PT_Sans({
   variable: '--font-pt-sans',
 });
 
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-dancing-script',
+});
+
 export const metadata: Metadata = {
   title: 'Passy - Baby Shower Planner',
   description: 'The simplest way to plan a beautiful baby shower',
@@ -38,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${playfair.variable} ${ptSans.variable} font-sans antialiased`}>
+      <body className={`${playfair.variable} ${ptSans.variable} ${dancingScript.variable} font-sans antialiased`}>
         <AuthProvider>
           <SidebarProvider>
             <div className="flex min-h-screen w-full">
