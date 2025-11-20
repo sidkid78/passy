@@ -160,8 +160,15 @@ export default function ThankYouNotesPage() {
             </CardHeader>
             <CardContent>
               <div className="p-8 border-2 border-primary/20 rounded-lg bg-gradient-to-br from-background to-accent/30 min-h-[200px] shadow-lg">
-                <div className="font-script text-2xl leading-relaxed text-foreground/90 prose prose-lg max-w-none dark:prose-invert">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <div className="font-script text-2xl leading-loose[2] text-foreground/90 *:font-script [&_p]:mb-4 [&_p]:font-script">
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      p: ({node, ...props}) => <p className="font-script" {...props} />,
+                      strong: ({node, ...props}) => <strong className="font-script font-bold" {...props} />,
+                      em: ({node, ...props}) => <em className="font-script" {...props} />,
+                    }}
+                  >
                     {generatedNote.thankYouNote}
                   </ReactMarkdown>
                 </div>

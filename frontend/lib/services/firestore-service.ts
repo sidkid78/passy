@@ -14,7 +14,7 @@ import {
   Timestamp,
   Unsubscribe,
 } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
+import { db, isConfigured } from '@/lib/firebase/config';
 import { v4 as uuidv4 } from 'uuid';
 import type {
   AppEvent,
@@ -30,13 +30,20 @@ import type {
 } from '@/lib/types';
 
 export class FirestoreService {
+  private static checkFirestore() {
+    if (!isConfigured || !db) {
+      throw new Error('Firebase Firestore not configured');
+    }
+  }
+
   // Events
   static async createEvent(
     userId: string,
     input: CreateEventInput
   ): Promise<string> {
+    this.checkFirestore();
     const eventId = uuidv4();
-    const eventRef = doc(db, 'events', eventId);
+    const eventRef = doc(db!, 'events', eventId);
 
     const eventData: AppEvent = {
       id: eventId,
@@ -66,7 +73,7 @@ export class FirestoreService {
     callback: (events: AppEvent[]) => void
   ): Unsubscribe {
     const q = query(
-      collection(db, 'events'),
+      collection(db!, 'events'),
       where('hostUserId', '==', userId),
       orderBy('date', 'asc')
     );
@@ -78,7 +85,7 @@ export class FirestoreService {
   }
 
   static async getEvent(eventId: string): Promise<AppEvent | null> {
-    const eventRef = doc(db, 'events', eventId);
+    const eventRef = doc(db!, 'events', eventId);
     const eventSnap = await getDoc(eventRef);
 
     if (!eventSnap.exists()) {
@@ -92,12 +99,12 @@ export class FirestoreService {
     eventId: string,
     updates: Partial<AppEvent>
   ): Promise<void> {
-    const eventRef = doc(db, 'events', eventId);
+    const eventRef = doc(db!, 'events', eventId);
     await updateDoc(eventRef, updates);
   }
 
   static async deleteEvent(eventId: string): Promise<void> {
-    const eventRef = doc(db, 'events', eventId);
+    const eventRef = doc(db!, 'events', eventId);
     await deleteDoc(eventRef);
   }
 
@@ -107,7 +114,7 @@ export class FirestoreService {
     input: CreateTaskInput
   ): Promise<string> {
     const taskId = uuidv4();
-    const taskRef = doc(db, 'events', eventId, 'tasks', taskId);
+    const taskRef = doc(db!, 'events', eventId, 'tasks', taskId);
 
     const taskData: any = {
       id: taskId,
@@ -133,7 +140,7 @@ export class FirestoreService {
     eventId: string,
     callback: (tasks: Task[]) => void
   ): Unsubscribe {
-    const tasksRef = collection(db, 'events', eventId, 'tasks');
+    const tasksRef = collection(db!, 'events', eventId, 'tasks');
 
     return onSnapshot(tasksRef, (snapshot) => {
       const tasks = snapshot.docs.map((doc) => doc.data() as Task);
@@ -142,7 +149,7 @@ export class FirestoreService {
   }
 
   static async toggleTask(eventId: string, taskId: string): Promise<void> {
-    const taskRef = doc(db, 'events', eventId, 'tasks', taskId);
+    const taskRef = doc(db!, 'events', eventId, 'tasks', taskId);
     const taskSnap = await getDoc(taskRef);
 
     if (taskSnap.exists()) {
@@ -152,7 +159,7 @@ export class FirestoreService {
   }
 
   static async deleteTask(eventId: string, taskId: string): Promise<void> {
-    const taskRef = doc(db, 'events', eventId, 'tasks', taskId);
+    const taskRef = doc(db!, 'events', eventId, 'tasks', taskId);
     await deleteDoc(taskRef);
   }
 
@@ -162,7 +169,7 @@ export class FirestoreService {
     input: CreateExpenseInput
   ): Promise<string> {
     const expenseId = uuidv4();
-    const expenseRef = doc(db, 'events', eventId, 'expenses', expenseId);
+    const expenseRef = doc(db!, 'events', eventId, 'expenses', expenseId);
 
     const expenseData: Expense = {
       id: expenseId,
@@ -185,7 +192,7 @@ export class FirestoreService {
     eventId: string,
     callback: (expenses: Expense[]) => void
   ): Unsubscribe {
-    const expensesRef = collection(db, 'events', eventId, 'expenses');
+    const expensesRef = collection(db!, 'events', eventId, 'expenses');
 
     return onSnapshot(expensesRef, (snapshot) => {
       const expenses = snapshot.docs.map((doc) => doc.data() as Expense);
@@ -197,7 +204,7 @@ export class FirestoreService {
     eventId: string,
     expenseId: string
   ): Promise<void> {
-    const expenseRef = doc(db, 'events', eventId, 'expenses', expenseId);
+    const expenseRef = doc(db!, 'events', eventId, 'expenses', expenseId);
     await deleteDoc(expenseRef);
   }
 
@@ -207,7 +214,7 @@ export class FirestoreService {
     input: CreateGuestInput
   ): Promise<string> {
     const guestId = uuidv4();
-    const guestRef = doc(db, 'guests', guestId);
+    const guestRef = doc(db!, 'guests', guestId);
 
     const guestData: any = {
       id: guestId,
@@ -237,7 +244,7 @@ export class FirestoreService {
     callback: (guests: Guest[]) => void
   ): Unsubscribe {
     const q = query(
-      collection(db, 'guests'),
+      collection(db!, 'guests'),
       where('eventId', '==', eventId)
     );
 
@@ -251,12 +258,12 @@ export class FirestoreService {
     guestId: string,
     status: Guest['status']
   ): Promise<void> {
-    const guestRef = doc(db, 'guests', guestId);
+    const guestRef = doc(db!, 'guests', guestId);
     await updateDoc(guestRef, { status });
   }
 
   static async deleteGuest(guestId: string): Promise<void> {
-    const guestRef = doc(db, 'guests', guestId);
+    const guestRef = doc(db!, 'guests', guestId);
     await deleteDoc(guestRef);
   }
 
@@ -266,7 +273,7 @@ export class FirestoreService {
     input: CreateRegistryItemInput
   ): Promise<string> {
     const itemId = uuidv4();
-    const itemRef = doc(db, 'events', eventId, 'registry_items', itemId);
+    const itemRef = doc(db!, 'events', eventId, 'registry_items', itemId);
 
     const itemData: any = {
       id: itemId,
@@ -295,7 +302,7 @@ export class FirestoreService {
     eventId: string,
     callback: (items: RegistryItem[]) => void
   ): Unsubscribe {
-    const itemsRef = collection(db, 'events', eventId, 'registry_items');
+    const itemsRef = collection(db!, 'events', eventId, 'registry_items');
 
     return onSnapshot(itemsRef, (snapshot) => {
       const items = snapshot.docs.map((doc) => doc.data() as RegistryItem);
@@ -309,7 +316,7 @@ export class FirestoreService {
     guestId: string,
     guestName: string
   ): Promise<void> {
-    const itemRef = doc(db, 'events', eventId, 'registry_items', itemId);
+    const itemRef = doc(db!, 'events', eventId, 'registry_items', itemId);
     await updateDoc(itemRef, {
       isClaimed: true,
       claimedBy: guestId,
@@ -321,7 +328,7 @@ export class FirestoreService {
     eventId: string,
     itemId: string
   ): Promise<void> {
-    const itemRef = doc(db, 'events', eventId, 'registry_items', itemId);
+    const itemRef = doc(db!, 'events', eventId, 'registry_items', itemId);
     await updateDoc(itemRef, {
       isClaimed: false,
       claimedBy: deleteField(),
@@ -333,7 +340,7 @@ export class FirestoreService {
     eventId: string,
     itemId: string
   ): Promise<void> {
-    const itemRef = doc(db, 'events', eventId, 'registry_items', itemId);
+    const itemRef = doc(db!, 'events', eventId, 'registry_items', itemId);
     await deleteDoc(itemRef);
   }
 }
